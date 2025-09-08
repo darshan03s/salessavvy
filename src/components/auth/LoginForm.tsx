@@ -1,0 +1,86 @@
+import { useForm } from 'react-hook-form'
+import { Input } from '../ui/input'
+import { Button } from '../ui/button'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
+
+const loginSchema = z.object({
+    username: z
+        .string()
+        .min(3, 'Username must be at least 3 characters')
+        .max(30, 'Username must be at most 30 characters')
+        .regex(/^[a-zA-Z0-9_]+$/, 'Only letters, numbers, and underscores allowed'),
+    password: z
+        .string()
+        .min(8, 'Password must be at least 8 characters')
+        .max(128, 'Password is too long')
+        .regex(/[A-Z]/, 'Add at least one uppercase letter')
+        .regex(/[a-z]/, 'Add at least one lowercase letter')
+        .regex(/[0-9]/, 'Add at least one number'),
+})
+
+type LoginFormData = z.infer<typeof loginSchema>
+
+const LoginForm = () => {
+    const registerApiUrl = import.meta.env.VITE_API_REGISTER_URL as string
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+    } = useForm<LoginFormData>({
+        resolver: zodResolver(loginSchema),
+        mode: 'onSubmit',
+    })
+
+    const onSubmit = (data: LoginFormData) => {
+        setTimeout(() => {
+            console.log('Form Data:', data)
+            toast.success('Login successfully!')
+        }, 5000)
+    }
+
+    return (
+        <div className="h-full flex flex-col justify-center gap-6">
+            <h1 className='text-xl font-semibold text-center'>Login</h1>
+            <form action={registerApiUrl} method='POST' onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4' >
+                <div className='flex flex-col gap-1'>
+                    <Input
+                        type='text'
+                        placeholder='Username'
+                        required
+                        className='w-full'
+                        {...register('username')}
+                    />
+                    {errors.username && (
+                        <p className="text-sm text-red-500">{errors.username.message}</p>
+                    )}
+                </div>
+
+                <div className='flex flex-col gap-1'>
+                    <Input
+                        type='password'
+                        placeholder='Password'
+                        required
+                        className='w-full'
+                        {...register('password')}
+                    />
+                    {errors.password && (
+                        <p className="text-sm text-red-500">{errors.password.message}</p>
+                    )}
+                </div>
+
+                <Button type="submit" disabled={isSubmitting} className='disabled:opacity-50'>
+                    {
+                        isSubmitting ?
+                            <span className='animate-spin rounded-full border-2 border-border border-t-transparent h-3 w-3'></span> : null
+                    }
+                    {isSubmitting ? 'Logging In...' : 'Login'}
+                </Button>
+            </form>
+        </div>
+    )
+}
+
+export default LoginForm
