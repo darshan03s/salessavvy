@@ -4,6 +4,7 @@ import { Button } from '../ui/button'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
+import { useNavigate } from 'react-router-dom'
 
 const loginSchema = z.object({
     username: z
@@ -23,7 +24,8 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>
 
 const LoginForm = () => {
-    const registerApiUrl = import.meta.env.VITE_API_REGISTER_URL as string
+    const loginApiUrl = import.meta.env.VITE_API_URL + "/api/auth/login"
+    const navigate = useNavigate()
 
     const {
         register,
@@ -34,17 +36,27 @@ const LoginForm = () => {
         mode: 'onSubmit',
     })
 
-    const onSubmit = (data: LoginFormData) => {
-        setTimeout(() => {
-            console.log('Form Data:', data)
-            toast.success('Login successfully!')
-        }, 5000)
+    const onSubmit = async (data: LoginFormData) => {
+        console.log('Form Data:', data)
+        const response = await fetch(loginApiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify(data),
+        })
+        if (!response.ok) {
+            toast.error('Login failed')
+        }
+        navigate('/')
+        toast.success('Login successfully!')
     }
 
     return (
         <div className="h-full flex flex-col justify-center gap-6">
             <h1 className='text-xl font-semibold text-center'>Login</h1>
-            <form action={registerApiUrl} method='POST' onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4' >
+            <form action={loginApiUrl} method='POST' onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4' >
                 <div className='flex flex-col gap-1'>
                     <Input
                         type='text'
