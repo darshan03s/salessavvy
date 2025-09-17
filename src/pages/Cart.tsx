@@ -49,7 +49,7 @@ const Cart = () => {
             <section className="cart-summary col-span-3 md:col-span-1 p-2">
                 <h2 className="text-xl font-bold text-center border-b pb-1 border-border">Cart Summary</h2>
                 <div className="py-2 space-y-4">
-                    <p className="text-lg font-semibold">Total Products: {cart.products.length}</p>
+                    <p className="text-lg font-semibold">Total Products: {cart.products.map(product => product.quantity).reduce((acc, item) => acc + item)}</p>
                     <p className="text-lg font-semibold">Total Amount: &#8377;{cart.overall_total_price}</p>
                     <Button className="w-full">Proceed to Payment</Button>
                 </div>

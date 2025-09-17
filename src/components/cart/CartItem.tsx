@@ -24,6 +24,7 @@ const CartItem = ({ cartItem }: { cartItem: CartResponseProductsType }) => {
                     <h3 className="text-lg font-semibold line-clamp-1">{cartItem.name}</h3>
                     <span className="text-sm text-muted-foreground line-clamp-1">{cartItem.description}</span>
                     <span className="text-md font-semibold">&#8377; {cartItem.price_per_unit}</span>
+                    <span className="text-xs font-semibold">Total : &#8377; {cartItem.total_price}</span>
                     <div className="flex items-center gap-4">
                         <Quantity quantity={cartItem.quantity} />
                         <button className="rounded-full size-4 text-red-600">
