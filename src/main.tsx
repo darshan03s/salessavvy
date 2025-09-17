@@ -4,11 +4,17 @@ import App from "@/App";
 import "@/index.css";
 import { ThemeProvider } from "@/features/theme";
 import { Toaster } from "./components/ui/sonner";
+import CartContextProvider from "./context/CartContext";
+import UserContextProvider from "./context/UserContext";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <ThemeProvider>
-      <App />
+      <UserContextProvider>
+        <CartContextProvider>
+          <App />
+        </CartContextProvider>
+      </UserContextProvider>
       <Toaster />
     </ThemeProvider>
   </BrowserRouter>

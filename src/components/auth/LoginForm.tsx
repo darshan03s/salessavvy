@@ -5,6 +5,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
+import { useUserContext } from '@/context/UserContext'
 
 const loginSchema = z.object({
     username: z
@@ -26,6 +27,7 @@ type LoginFormData = z.infer<typeof loginSchema>
 const LoginForm = () => {
     const loginApiUrl = import.meta.env.VITE_API_URL + "/api/auth/login"
     const navigate = useNavigate()
+    const { setUser } = useUserContext()
 
     const {
         register,
@@ -50,6 +52,11 @@ const LoginForm = () => {
             toast.error('Login failed')
         }
         navigate('/')
+        const resJson = await response.json()
+        setUser({
+            role: resJson.role,
+            username: resJson.username
+        })
         toast.success('Login successfully!')
     }
 

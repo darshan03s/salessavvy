@@ -4,8 +4,7 @@ export type ProductType = {
     description: string;
     price: number;
     stock: number;
-    image: string;
-    category_name: string;
+    images: string[];
 };
 
 export type CartItemType = {
@@ -16,4 +15,9 @@ export type CartItemType = {
     stock: number;
     image: string;
     quantity: number;
+};
+
+export type UserType = {
+    role: string;
+    username: string;
 };

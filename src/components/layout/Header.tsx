@@ -5,10 +5,13 @@ import { Handbag, LogOut, ShoppingCart, User2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import CategoriesHeader from "./CategoriesHeader"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
+import { useCartContext } from "@/context/CartContext"
+import { useUserContext } from "@/context/UserContext"
 
 const Header = () => {
-
+    const { cartItemsCount } = useCartContext()
     const location = useLocation();
+    const { user } = useUserContext()
 
     let isAuthRoute = false;
 
@@ -30,7 +33,7 @@ const Header = () => {
                                 <span
                                     className="absolute -top-1.5 -right-1 flex min-h-5 min-w-6 items-center justify-center rounded-full px-2 bg-red-600 text-[10px] font-bold text-white"
                                 >
-                                    0
+                                    {cartItemsCount}
                                 </span>
 
                             </Link> : null
@@ -52,9 +55,12 @@ const Header = () => {
                         </PopoverContent>
                     </Popover>
 
-                    <Link to="/auth/login" className={cn(buttonVariants({ variant: 'default', size: 'sm' }))}>
-                        Login
-                    </Link>
+                    {
+                        !user ?
+                            <Link to="/auth/login" className={cn(buttonVariants({ variant: 'default', size: 'sm' }))}>
+                                Login
+                            </Link> : null
+                    }
                     <ThemeToggleButton />
                 </div>
 
