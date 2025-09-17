@@ -2,8 +2,8 @@ import type { UserType } from "@/types";
 import { createContext, useState, useContext, type Dispatch, type ReactNode, type SetStateAction } from "react"
 
 type UserContextType = {
-    user: UserType | undefined,
-    setUser: Dispatch<SetStateAction<UserType | undefined>>
+    user: UserType | null,
+    setUser: Dispatch<SetStateAction<UserType | null>>
     fetchingUser: boolean
     setFetchingUser: Dispatch<SetStateAction<boolean>>
 };
@@ -21,7 +21,7 @@ export const useUserContext = () => {
 }
 
 const UserContextProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<UserType>()
+    const [user, setUser] = useState<UserType | null>(null)
     const [fetchingUser, setFetchingUser] = useState<boolean>(true)
     return <UserContext.Provider value={{ user, setUser, fetchingUser, setFetchingUser }}>
         {children}

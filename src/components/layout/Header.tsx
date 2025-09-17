@@ -1,5 +1,5 @@
 import { ThemeToggleButton } from "@/features/theme"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Button, buttonVariants } from "../ui/button"
 import { Handbag, LogOut, ShoppingCart, User2 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -7,16 +7,38 @@ import CategoriesHeader from "./CategoriesHeader"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { useCartContext } from "@/context/CartContext"
 import { useUserContext } from "@/context/UserContext"
+import axios from "axios"
+import { toast } from "sonner"
 
 const Header = () => {
     const { cartItemsCount } = useCartContext()
     const location = useLocation();
-    const { user } = useUserContext()
+    const { user, setUser } = useUserContext()
+    const apiUrl = import.meta.env.VITE_API_URL + "/api"
+    const navigate = useNavigate()
 
     let isAuthRoute = false;
 
     if (location.pathname.includes('auth')) {
         isAuthRoute = true;
+    }
+
+    function handleLogout() {
+        try {
+            axios.get(apiUrl + "/auth/logout", {
+                withCredentials: true
+            }).then(() => {
+                toast.success("Logged Out")
+                setUser(null)
+                navigate("/auth/login")
+            }).catch(err => {
+                toast.error("Unable to log out")
+                console.error(err)
+            })
+        } catch (err) {
+            toast.error("Unable to log out")
+            console.error(err)
+        }
     }
 
     return (
@@ -39,21 +61,26 @@ const Header = () => {
                             </Link> : null
                     }
 
-                    <Popover>
-                        <PopoverTrigger className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'rounded-full')}>
-                            <User2 />
-                        </PopoverTrigger>
-                        <PopoverContent side="bottom" align="end" className="w-40 p-2 shadow-none">
-                            <div className="flex flex-col gap-2">
-                                <Link to="/orders" className={cn(buttonVariants({ variant: 'ghost' }))}>
-                                    <Handbag /> Orders
-                                </Link>
-                                <Button variant={'ghost'} className=''>
-                                    <LogOut /> Log Out
-                                </Button>
-                            </div>
-                        </PopoverContent>
-                    </Popover>
+                    {
+                        user ?
+                            <Popover>
+                                <PopoverTrigger className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'rounded-full')}>
+                                    <User2 />
+                                </PopoverTrigger>
+                                <PopoverContent side="bottom" align="end" className="w-40 p-2 shadow-none">
+                                    <div className="flex flex-col gap-2">
+                                        <Link to="/orders" className={cn(buttonVariants({ variant: 'ghost' }))}>
+                                            <Handbag /> Orders
+                                        </Link>
+                                        <Button
+                                            onClick={handleLogout}
+                                            variant={'ghost'} className=''>
+                                            <LogOut /> Log Out
+                                        </Button>
+                                    </div>
+                                </PopoverContent>
+                            </Popover> : null
+                    }
 
                     {
                         !user ?
