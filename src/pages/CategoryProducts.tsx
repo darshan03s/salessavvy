@@ -37,7 +37,7 @@ const CategoryProducts = () => {
     }, [categoryName, categoryProductsUrl, navigate, user])
 
     return (
-        <div className="category-products-page p-1">
+        <div className="category-products-page p-1 px-3">
             {
                 products ?
                     <>
