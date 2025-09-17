@@ -1,13 +1,13 @@
-import { cartItem } from "@/data"
 import CartItem from "./CartItem"
+import type { CartResponseProductsType } from '@/types'
 
-const CartItemsList = () => {
+const CartItemsList = ({ productsList }: { productsList: CartResponseProductsType[] }) => {
 
     return (
         <div className="py-2 space-y-2">
-            {[...Array(3)].map((_, index) => {
+            {productsList.map((product: CartResponseProductsType) => {
                 return (
-                    <CartItem key={index} cartItem={cartItem} />
+                    <CartItem key={product.product_id} cartItem={product} />
                 )
             })}
         </div>

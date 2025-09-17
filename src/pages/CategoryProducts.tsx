@@ -6,7 +6,7 @@ import { useUserContext } from "@/context/UserContext"
 
 const CategoryProducts = () => {
     const { categoryName } = useParams()
-    const categoryProductsUrl = import.meta.env.VITE_API_URL + `/api/products?category=${categoryName}`
+    const categoryProductsUrl = import.meta.env.VITE_API_URL
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
     const { user } = useUserContext()
@@ -16,7 +16,7 @@ const CategoryProducts = () => {
             navigate("/auth/login");
             return
         }
-        axios.get(categoryProductsUrl, {
+        axios.get(categoryProductsUrl + `/api/products?category=${categoryName}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
