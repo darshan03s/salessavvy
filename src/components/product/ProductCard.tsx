@@ -2,46 +2,15 @@ import { ShoppingCart } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { Button } from "../ui/button"
 import { type ProductType } from "../../types"
-import axios from "axios"
-import { useUserContext } from "@/context/UserContext"
-import { toast } from "sonner"
 import { useCartContext } from "@/context/CartContext"
 
 const ProductCard = ({ product }: { product: ProductType }) => {
     const cartApiUrl = import.meta.env.VITE_API_URL + "/api/cart"
     const navigate = useNavigate()
-    const { user } = useUserContext()
-    const { setCartItemsCount } = useCartContext()
+    const { addToCart } = useCartContext()
 
     const handleClick = () => {
         navigate(`/product/${product.product_id}`)
-    }
-
-    function updateCartItemsCount() {
-        axios.get(cartApiUrl + "/items-count", {
-            withCredentials: true
-        }).then((res) => {
-            setCartItemsCount(res.data)
-        })
-    }
-
-    async function handleAddToCart(product_id: number) {
-        const response = await axios.post(
-            cartApiUrl + "/add",
-            { productId: product_id, username: user?.username, quantity: 1 },
-            {
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                withCredentials: true
-            },
-        );
-        if (response.status === 201) {
-            toast.success("Added product to cart")
-            updateCartItemsCount()
-        } else {
-            toast.error("Failed to add product to cart")
-        }
     }
 
     return (
@@ -61,7 +30,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
                 <Button
                     onClick={(e) => {
                         e.stopPropagation()
-                        handleAddToCart(product.product_id)
+                        addToCart(product.product_id, cartApiUrl)
                     }}
                     className="w-full">
                     <ShoppingCart className="size-4" />
