@@ -14,21 +14,42 @@ import { useUserContext } from "./context/UserContext";
 
 const App = () => {
   const apiUrl = import.meta.env.VITE_API_URL
-  const { setCartItemsCount } = useCartContext()
+  const { getCartItemsCount } = useCartContext()
   const navigate = useNavigate()
-  const { user } = useUserContext()
+  const { user, fetchingUser, setUser, setFetchingUser } = useUserContext()
 
   useEffect(() => {
-    if (!user) {
+    axios.get(apiUrl + "/api/auth/verify", {
+      withCredentials: true
+    }).then(res => {
+      setUser({
+        username: res.data.username,
+        role: res.data.role
+      })
+
+      setFetchingUser(false)
+    }).catch(error => {
+      // Handle 401 or any other error
+      if (error.response?.status === 401) {
+        navigate("/auth/login");
+      }
+      setFetchingUser(false)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!user && !fetchingUser) {
       navigate("/auth/login");
       return
     }
-    axios.get(apiUrl + "/api/cart/items-count", {
-      withCredentials: true
-    }).then((res) => {
-      setCartItemsCount(res.data)
-    })
-  }, [user])
+    getCartItemsCount()
+  }, [user, fetchingUser])
+
+  if (fetchingUser) {
+    return <div className="h-screen w-full flex justify-center items-center font-semibold text-lg">
+      Loading...
+    </div>
+  }
 
   return (
     <div className="bg-background text-foreground">

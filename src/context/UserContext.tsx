@@ -4,8 +4,9 @@ import { createContext, useState, useContext, type Dispatch, type ReactNode, typ
 type UserContextType = {
     user: UserType | undefined,
     setUser: Dispatch<SetStateAction<UserType | undefined>>
+    fetchingUser: boolean
+    setFetchingUser: Dispatch<SetStateAction<boolean>>
 };
-
 
 // eslint-disable-next-line
 export const UserContext = createContext<UserContextType | undefined>(undefined)
@@ -21,7 +22,8 @@ export const useUserContext = () => {
 
 const UserContextProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<UserType>()
-    return <UserContext.Provider value={{ user, setUser }}>
+    const [fetchingUser, setFetchingUser] = useState<boolean>(true)
+    return <UserContext.Provider value={{ user, setUser, fetchingUser, setFetchingUser }}>
         {children}
     </UserContext.Provider>
 }

@@ -52,15 +52,15 @@ const LoginForm = () => {
             toast.error('Login failed')
             return
         }
-        setTimeout(() => {
-            navigate('/')
-        }, 1000)
         const resJson = await response.json()
         setUser({
             role: resJson.role,
             username: resJson.username
         })
         toast.success('Login successfully!')
+        setTimeout(() => {
+            navigate('/')
+        }, 1000)
     }
 
     return (
