@@ -17,7 +17,7 @@ const CartItem = ({ cartItem }: { cartItem: CartResponseProductsType }) => {
         <div className="cart-item flex items-center justify-between border-b border-border last:border-0 pb-1">
             <div className="flex items-center gap-4">
                 <div className="cart-product-image w-20 h-auto">
-                    <img src={`https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/z/e/r/4xl-c301-d-teal-dennis-lingo-original-imah3mzazgyqbgn8.jpeg?q=70`} />
+                    <img src={`${cartItem.image_url}`} />
                 </div>
 
                 <div className="cart-product-details p-2 flex flex-col">
