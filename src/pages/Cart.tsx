@@ -1,4 +1,5 @@
 import CartItemsList from "@/components/cart/CartItemsList"
+import Loading from "@/components/Loading"
 import { Button } from "@/components/ui/button"
 import { useCartContext } from "@/context/CartContext"
 import { useUserContext } from "@/context/UserContext"
@@ -48,7 +49,7 @@ const Cart = () => {
     }, [user])
 
     if (!cart) {
-        return <h1>Loading...</h1>
+        return <Loading />
     }
 
     const handleCheckout = async () => {

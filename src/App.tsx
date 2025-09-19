@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useCartContext } from "./context/CartContext";
 import { useUserContext } from "./context/UserContext";
+import Loading from "./components/Loading";
 
 const App = () => {
   const apiUrl = import.meta.env.VITE_API_URL
@@ -46,9 +47,7 @@ const App = () => {
   }, [user, fetchingUser])
 
   if (fetchingUser) {
-    return <div className="h-screen w-full flex justify-center items-center font-semibold text-lg">
-      Loading...
-    </div>
+    return <Loading />
   }
 
   return (

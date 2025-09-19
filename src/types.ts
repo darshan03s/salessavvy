@@ -36,3 +36,14 @@ export type CartResponseType = {
     products: CartResponseProductsType[];
     overall_total_price: number;
 };
+
+export type OrderType = {
+    description: string;
+    image_url: string;
+    name: string;
+    order_id: string;
+    price_per_unit: string;
+    product_id: number;
+    quantity: number;
+    total_price: number;
+};
