@@ -49,7 +49,7 @@ const Header = () => {
                 </div>
                 <div className="header-right flex items-center gap-3">
                     {
-                        !isAuthRoute ?
+                        !isAuthRoute && user?.role === "CUSTOMER" ?
                             <Link to={'/cart'} className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'rounded-full relative')}>
                                 <ShoppingCart />
                                 <span
@@ -69,9 +69,12 @@ const Header = () => {
                                 </PopoverTrigger>
                                 <PopoverContent side="bottom" align="end" className="w-40 p-2 shadow-none">
                                     <div className="flex flex-col gap-2">
-                                        <Link to="/orders" className={cn(buttonVariants({ variant: 'ghost' }))}>
-                                            <Handbag /> Orders
-                                        </Link>
+                                        {
+                                            user.role === "CUSTOMER" ?
+                                                <Link to="/orders" className={cn(buttonVariants({ variant: 'ghost' }))}>
+                                                    <Handbag /> Orders
+                                                </Link> : null
+                                        }
                                         <Button
                                             onClick={handleLogout}
                                             variant={'ghost'} className=''>

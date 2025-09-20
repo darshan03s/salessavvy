@@ -1,13 +1,15 @@
+import { useUserContext } from "@/context/UserContext";
 import { Link, useLocation, useParams } from "react-router-dom";
 
 const CategoriesHeader = () => {
     const categories = ["Shirts", "Pants", "Phones"];
 
     const { categoryName } = useParams();
+    const { user } = useUserContext()
 
     const location = useLocation();
 
-    if (location.pathname === '/auth/login' || location.pathname === '/auth/register' || location.pathname === '/cart' || location.pathname.includes('/product/') || location.pathname === '/orders') {
+    if (location.pathname === '/auth/login' || location.pathname === '/auth/register' || location.pathname === '/cart' || location.pathname.includes('/product/') || location.pathname === '/orders' || user?.role === "ADMIN") {
         return null;
     }
 

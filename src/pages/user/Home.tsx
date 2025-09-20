@@ -1,11 +1,17 @@
+import { useUserContext } from "@/context/UserContext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate()
+  const { user } = useUserContext()
 
   useEffect(() => {
-    navigate("/products/category/Shirts")
+    if (user && user.role === "CUSTOMER") {
+      navigate("/products/category/Shirts")
+    } else {
+      navigate("/admin")
+    }
   }, [navigate])
 
   return (
