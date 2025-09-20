@@ -1,12 +1,6 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Home from "@/pages/Home";
+import { Cart, CategoryProducts, Home, Login, Orders, Product, Register } from "@/pages/user"
 import Layout from "@/components/layout/Layout";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import CategoryProducts from "./pages/CategoryProducts";
-import Product from "./pages/Product";
-import Cart from "./pages/Cart";
-import Orders from "./pages/Orders";
 import { useEffect } from "react";
 import axios from "axios";
 import { useCartContext } from "./context/CartContext";
