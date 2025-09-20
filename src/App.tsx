@@ -38,7 +38,9 @@ const App = () => {
       navigate("/auth/login");
       return
     }
-    getCartItemsCount()
+    if (user && !fetchingUser && user.role === "CUSTOMER") {
+      getCartItemsCount()
+    }
   }, [user, fetchingUser])
 
   if (fetchingUser) {
