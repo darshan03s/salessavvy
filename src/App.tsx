@@ -7,6 +7,7 @@ import axios from "axios";
 import { useCartContext } from "./context/CartContext";
 import { useUserContext } from "./context/UserContext";
 import Loading from "./components/Loading";
+import ProtectedAdmin from "./components/auth/ProtectedAdmin";
 
 const App = () => {
   const apiUrl = import.meta.env.VITE_API_URL
@@ -59,10 +60,10 @@ const App = () => {
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="/admin/products" element={<AdminProducts />} />
-          <Route path="/admin/business" element={<AdminBusiness />} />
+          <Route path="/admin" element={<ProtectedAdmin><Admin /></ProtectedAdmin>} />
+          <Route path="/admin/users" element={<ProtectedAdmin><AdminUsers /></ProtectedAdmin>} />
+          <Route path="/admin/products" element={<ProtectedAdmin><AdminProducts /></ProtectedAdmin>} />
+          <Route path="/admin/business" element={<ProtectedAdmin><AdminBusiness /></ProtectedAdmin>} />
         </Route>
       </Routes>
     </div>

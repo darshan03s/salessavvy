@@ -17,9 +17,18 @@ export type CartItemType = {
     stock: number;
 };
 
+export type UserRole = "CUSTOMER" | "ADMIN";
+
 export type UserType = {
-    role: string;
+    role: UserRole;
     username: string;
+};
+
+export type FullUserType = UserType & {
+    id: number;
+    email: string;
+    createdAt: string;
+    updatedAt: string;
 };
 
 export type CartResponseProductsType = {

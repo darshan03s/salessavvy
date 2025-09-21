@@ -1,26 +1,7 @@
-import { useUserContext } from "@/context/UserContext";
-import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { Link } from "react-router-dom";
 import { Users, ShoppingBag, Building } from 'lucide-react';
 
 const Admin = () => {
-    const { user, fetchingUser } = useUserContext();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!user && !fetchingUser) {
-            navigate("/auth/login");
-            return;
-        }
-
-        if (user?.role === "CUSTOMER") {
-            toast.error("You are not Admin");
-            navigate("/");
-            return;
-        }
-    }, [user, fetchingUser, navigate]);
-
     return (
         <div className="admin-page h-[calc(100vh-48px-48px)] p-4">
             <h1 className="text-2xl font-bold mb-4 text-center">Admin Dashboard</h1>
