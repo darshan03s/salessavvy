@@ -1,12 +1,12 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Cart, CategoryProducts, Home, Login, Orders, Product, Register } from "@/pages/user"
+import { Admin, AdminBusiness, AdminProducts, AdminUsers } from "@/pages/admin";
 import Layout from "@/components/layout/Layout";
 import { useEffect } from "react";
 import axios from "axios";
 import { useCartContext } from "./context/CartContext";
 import { useUserContext } from "./context/UserContext";
 import Loading from "./components/Loading";
-import Admin from "./pages/admin/Admin";
 
 const App = () => {
   const apiUrl = import.meta.env.VITE_API_URL
@@ -60,6 +60,9 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/products" element={<AdminProducts />} />
+          <Route path="/admin/business" element={<AdminBusiness />} />
         </Route>
       </Routes>
     </div>
