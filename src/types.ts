@@ -4,6 +4,7 @@ export type ProductType = {
     description: string;
     price: number;
     stock: number;
+    category?: string;
     images: string[];
 };
 
@@ -15,6 +16,11 @@ export type CartItemType = {
     price_per_unit: number;
     quantity: number;
     stock: number;
+};
+
+export type CategoryType = {
+    categoryId: number;
+    categoryName: string;
 };
 
 export type UserRole = "CUSTOMER" | "ADMIN";
