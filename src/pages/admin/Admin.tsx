@@ -6,6 +6,7 @@ import { toast } from "sonner"
 const Admin = () => {
     const { user, fetchingUser } = useUserContext()
     const navigate = useNavigate()
+
     useEffect(() => {
         if (!user && !fetchingUser) {
             navigate("/auth/login")
@@ -18,8 +19,9 @@ const Admin = () => {
             return
         }
     }, [])
+
     return (
-        <div>
+        <div className="admin-page h-[calc(100vh-48px-48px)]">
             Admin
         </div>
     )

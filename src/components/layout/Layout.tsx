@@ -11,7 +11,7 @@ const Main = () => {
 
 const Footer = () => {
     return (
-        <footer className="bg-foreground text-background w-full h-12 flex items-center justify-center">
+        <footer className="bg-foreground text-background w-full h-[48px] flex items-center justify-center">
             <span className="text-xs">Copyright @2025</span>
         </footer>
     )

@@ -43,7 +43,7 @@ const Header = () => {
 
     return (
         <header className="sticky top-0 z-10">
-            <div className=" flex justify-between items-center h-12 px-6 py-3 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60 bg-background">
+            <div className=" flex justify-between items-center h-[48px] px-6 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60 bg-background">
                 <div className="header-left">
                     <Link to="/">{import.meta.env.VITE_APP_NAME}</Link>
                 </div>
