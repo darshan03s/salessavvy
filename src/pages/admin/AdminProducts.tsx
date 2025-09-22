@@ -234,7 +234,7 @@ const AdminProducts = () => {
             {isAddingProduct ? <AddProductModal /> : null}
             <div className="px-3">
                 <div className="header flex items-center justify-between">
-                    <h1 className="text-2xl font-bold">Products Management</h1>
+                    <h1 className="text-lg md:text-2xl font-bold">Products Management</h1>
                     <div className="actions">
                         <Button onClick={handleAddProduct} variant={"outline"} className="flex items-center gap-1" >
                             <Plus />

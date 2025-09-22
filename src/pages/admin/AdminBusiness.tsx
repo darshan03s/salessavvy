@@ -8,19 +8,16 @@ const AdminBusiness = () => {
         <div className="bg-background py-8">
             <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+                    <h1 className="text-lg md:text-2xl font-bold text-foreground mb-2">
                         Business Analytics
                     </h1>
-                    <p className="text-gray-600 text-lg">
-                        Track your business performance across different time periods
-                    </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <OverallReport />
                     <YearlyReport />
                     <MonthlyReport />
                     <DailyReport />
-                    <OverallReport />
                 </div>
             </div>
         </div>

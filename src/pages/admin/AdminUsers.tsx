@@ -51,7 +51,7 @@ const AdminUsers = () => {
 
     return (
         <div className="px-3 flex flex-col gap-2 max-w-4xl mx-auto">
-            <h1 className="text-2xl font-bold text-center">Users Management</h1>
+            <h1 className="text-lg md:text-2xl font-bold text-center">Users Management</h1>
 
             <div className="users-table">
                 {users ? <UsersTable users={users} updateUser={updateUser} /> : null}
