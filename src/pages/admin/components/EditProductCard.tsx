@@ -19,6 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import { toast } from "sonner"
 import { productSchema } from "@/zodSchemas"
+import ProductImage from "@/components/product/ProductImage"
 
 type ProductData = z.infer<typeof productSchema>
 
@@ -233,9 +234,7 @@ const EditProductCard = ({ product, categories, onUpdate }: { product: ProductTy
         <>
             {isEditingProduct && <EditProductModal />}
             <div className="product-card border rounded-md border-border">
-                <div className="product-image rounded-md rounded-b-none w-full h-[20rem]">
-                    <img src={product.images[0]} alt={product.name} className="w-full h-full p-4 rounded-md rounded-b-none" />
-                </div>
+                <ProductImage src={product.images[0]} alt={product.name} />
 
                 <div className="p-1.5 space-y-4">
                     <div className="product-info space-y-1">

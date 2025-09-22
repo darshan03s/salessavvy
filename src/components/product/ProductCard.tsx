@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { Button } from "../ui/button"
 import { type ProductType } from "../../types"
 import { useCartContext } from "@/context/CartContext"
+import ProductImage from "./ProductImage"
 
 const ProductCard = ({ product }: { product: ProductType }) => {
     const cartApiUrl = import.meta.env.VITE_API_URL + "/api/cart"
@@ -15,9 +16,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
 
     return (
         <div className="product-card border rounded-md border-border">
-            <div className="product-image rounded-md rounded-b-none w-full h-[20rem]">
-                <img src={product.images[0]} alt={product.name} className="w-full h-full p-4 rounded-md rounded-b-none" />
-            </div>
+            <ProductImage src={product.images[0]} alt={product.name} />
 
             <div className="p-1.5 space-y-4">
                 <div className="product-info space-y-1">

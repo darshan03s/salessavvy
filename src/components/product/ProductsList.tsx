@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard"
 import type { CategoryType, ProductType } from "@/types"
 import EditProductCard from "../../pages/admin/components/EditProductCard"
 
-const ProductsList = ({ products, categories, onUpdate }: { products: ProductType[], categories?: CategoryType[], onUpdate: () => void }) => {
+const ProductsList = ({ products, categories, onUpdate }: { products: ProductType[], categories?: CategoryType[], onUpdate?: () => void }) => {
     const { user } = useUserContext()
 
     return (
@@ -13,7 +13,7 @@ const ProductsList = ({ products, categories, onUpdate }: { products: ProductTyp
                     if (user?.role === "CUSTOMER") {
                         return <ProductCard key={product.product_id} product={product} />
                     } else if (user?.role === "ADMIN") {
-                        return <EditProductCard key={product.product_id} product={product} categories={categories!} onUpdate={onUpdate} />
+                        return <EditProductCard key={product.product_id} product={product} categories={categories!} onUpdate={onUpdate!} />
                     }
                 })
             }

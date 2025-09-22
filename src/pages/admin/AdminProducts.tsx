@@ -20,6 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { productSchema } from "@/zodSchemas";
+import { Label } from "@/components/ui/label";
 
 type ProductData = z.infer<typeof productSchema>
 
@@ -28,24 +29,6 @@ const AdminProducts = () => {
     const [categories, setCategories] = useState<CategoryType[] | null>(null)
     const productsApiUrl = import.meta.env.VITE_API_URL + "/admin/products"
     const [isAddingProduct, setIsAddingProduct] = useState<boolean>(false)
-
-    const {
-        register,
-        handleSubmit,
-        control,
-        formState: { errors, isSubmitting },
-    } = useForm<ProductData>({
-        resolver: zodResolver(productSchema),
-        mode: 'onSubmit',
-        defaultValues: {
-            category: "",
-            description: "",
-            image: "",
-            name: "",
-            price: 0.00,
-            stock: 0
-        }
-    })
 
     function getProducts() {
         try {
@@ -108,6 +91,23 @@ const AdminProducts = () => {
     }
 
     const AddProductModal = () => {
+        const {
+            register,
+            handleSubmit,
+            control,
+            formState: { errors, isSubmitting },
+        } = useForm<ProductData>({
+            resolver: zodResolver(productSchema),
+            mode: 'onSubmit',
+            defaultValues: {
+                category: "",
+                description: "",
+                image: "",
+                name: "",
+                price: 0,
+                stock: 0
+            }
+        })
         return (
             <Dialog onOpenChange={setIsAddingProduct} open={isAddingProduct}>
                 <DialogContent className="sm:max-w-[425px]">
@@ -117,7 +117,9 @@ const AdminProducts = () => {
                     </DialogHeader>
                     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
                         <div className='flex flex-col gap-1'>
+                            <Label htmlFor="product-name" className="text-xs">Product Name</Label>
                             <Input
+                                id="product-name"
                                 type='text'
                                 placeholder='Product Name'
                                 className='w-full'
@@ -129,7 +131,9 @@ const AdminProducts = () => {
                         </div>
 
                         <div className='flex flex-col gap-1'>
+                            <Label htmlFor="product-description" className="text-xs">Product Description</Label>
                             <Input
+                                id="product-description"
                                 type='text'
                                 placeholder='Product Description'
                                 className='w-full'
@@ -141,7 +145,9 @@ const AdminProducts = () => {
                         </div>
 
                         <div className='flex flex-col gap-1'>
+                            <Label htmlFor="product-image" className="text-xs">Product Image</Label>
                             <Input
+                                id="product-image"
                                 type='text'
                                 placeholder='Product Image'
                                 className='w-full'
@@ -153,7 +159,9 @@ const AdminProducts = () => {
                         </div>
 
                         <div className='flex flex-col gap-1'>
+                            <Label htmlFor="product-price" className="text-xs">Product Price</Label>
                             <Input
+                                id="product-price"
                                 type='number'
                                 step={"0.01"}
                                 placeholder='Product Price'
@@ -169,7 +177,9 @@ const AdminProducts = () => {
                         </div>
 
                         <div className='flex flex-col gap-1'>
+                            <Label htmlFor="product-stock" className="text-xs">Product Stock</Label>
                             <Input
+                                id="product-stock"
                                 type='number'
                                 placeholder='Product Stock'
                                 className='w-full'
@@ -184,6 +194,7 @@ const AdminProducts = () => {
                         </div>
 
                         <div className="flex flex-col gap-1">
+                            <span className="text-xs font-semibold">Product Category</span>
                             <Controller
                                 name="category"
                                 control={control}
