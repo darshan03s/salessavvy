@@ -6,23 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { useNavigate } from 'react-router-dom'
-
-const registerSchema = z.object({
-  username: z
-    .string()
-    .min(3, 'Username must be at least 3 characters')
-    .max(30, 'Username must be at most 30 characters')
-    .regex(/^[a-zA-Z0-9_]+$/, 'Only letters, numbers, and underscores allowed'),
-  email: z.email('Enter a valid email address'),
-  password: z
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .max(128, 'Password is too long')
-    .regex(/[A-Z]/, 'Add at least one uppercase letter')
-    .regex(/[a-z]/, 'Add at least one lowercase letter')
-    .regex(/[0-9]/, 'Add at least one number'),
-  role: z.enum(['ADMIN', 'CUSTOMER']),
-})
+import { registerSchema } from '@/zodSchemas'
 
 type RegisterFormData = z.infer<typeof registerSchema>
 

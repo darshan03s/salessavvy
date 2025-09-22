@@ -25,18 +25,9 @@ import { z } from "zod"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
+import { updateUserSchema } from "@/zodSchemas"
 
-const updateSchema = z.object({
-    username: z
-        .string()
-        .min(3, 'Username must be at least 3 characters')
-        .max(30, 'Username must be at most 30 characters')
-        .regex(/^[a-zA-Z0-9_]+$/, 'Only letters, numbers, and underscores allowed'),
-    email: z.email('Enter a valid email address'),
-    role: z.enum(['ADMIN', 'CUSTOMER']),
-})
-
-type UpdateFormData = z.infer<typeof updateSchema>
+type UpdateFormData = z.infer<typeof updateUserSchema>
 
 const UsersTable = ({ users, updateUser }: { users: FullUserType[], updateUser: (updatedUser: Omit<FullUserType, "createdAt" | "updatedAt">) => void }) => {
     const [isModifyModalOpen, setIsModifyModalOpen] = useState<boolean>(false)
@@ -49,7 +40,7 @@ const UsersTable = ({ users, updateUser }: { users: FullUserType[], updateUser: 
         formState: { errors, isSubmitting },
         reset
     } = useForm<UpdateFormData>({
-        resolver: zodResolver(updateSchema),
+        resolver: zodResolver(updateUserSchema),
         mode: 'onSubmit',
     })
 

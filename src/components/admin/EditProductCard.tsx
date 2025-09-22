@@ -18,15 +18,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import { toast } from "sonner"
-
-const productSchema = z.object({
-    name: z.string().min(1, "Product name is required"),
-    description: z.string().min(1, "Product description is required"),
-    price: z.number().min(0, "Price must be a positive number"),
-    stock: z.number().min(0, "Stock must be a positive number"),
-    category: z.string().min(1, "Please select a category"),
-    image: z.string("Please add a image url")
-})
+import { productSchema } from "@/zodSchemas"
 
 type ProductData = z.infer<typeof productSchema>
 
@@ -117,7 +109,7 @@ const EditProductCard = ({ product, categories, onUpdate }: { product: ProductTy
         }
     }
 
-    const ProductModal = () => {
+    const EditProductModal = () => {
         return (
             <Dialog onOpenChange={setIsEditingProduct} open={isEditingProduct}>
                 <DialogContent className="sm:max-w-[425px]">
@@ -239,7 +231,7 @@ const EditProductCard = ({ product, categories, onUpdate }: { product: ProductTy
 
     return (
         <>
-            {isEditingProduct && <ProductModal />}
+            {isEditingProduct && <EditProductModal />}
             <div className="product-card border rounded-md border-border">
                 <div className="product-image rounded-md rounded-b-none w-full h-[20rem]">
                     <img src={product.images[0]} alt={product.name} className="w-full h-full p-4 rounded-md rounded-b-none" />
