@@ -1,4 +1,4 @@
-import UsersTable from "@/components/admin/UsersTable";
+import UsersTable from "./components/UsersTable";
 import type { FullUserType } from "@/types";
 import axios from "axios";
 import { useEffect, useState } from "react";

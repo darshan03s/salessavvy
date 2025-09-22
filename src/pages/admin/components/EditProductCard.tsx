@@ -1,6 +1,6 @@
 import { Pencil } from "lucide-react"
-import { Button } from "../ui/button"
-import { type CategoryType, type ProductType } from "../../types"
+import { Button } from "../../../components/ui/button"
+import { type CategoryType, type ProductType } from "../../../types"
 import {
     Dialog,
     DialogClose,
@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input"
 import { useEffect, useState } from "react"
 import { z } from "zod"
 import { Controller, useForm } from "react-hook-form"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../components/ui/select"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import { toast } from "sonner"

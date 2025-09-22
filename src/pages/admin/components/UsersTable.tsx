@@ -6,7 +6,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { Button } from "../ui/button"
+import { Button } from "../../../components/ui/button"
 import { Pencil } from "lucide-react"
 import type { FullUserType } from "@/types"
 import { useEffect, useState } from "react"
@@ -24,7 +24,7 @@ import { Input } from "@/components/ui/input"
 import { z } from "zod"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../components/ui/select"
 import { updateUserSchema } from "@/zodSchemas"
 
 type UpdateFormData = z.infer<typeof updateUserSchema>

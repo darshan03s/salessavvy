@@ -1,7 +1,7 @@
 import { useUserContext } from "@/context/UserContext"
 import ProductCard from "./ProductCard"
 import type { CategoryType, ProductType } from "@/types"
-import EditProductCard from "../admin/EditProductCard"
+import EditProductCard from "../../pages/admin/components/EditProductCard"
 
 const ProductsList = ({ products, categories, onUpdate }: { products: ProductType[], categories?: CategoryType[], onUpdate: () => void }) => {
     const { user } = useUserContext()
