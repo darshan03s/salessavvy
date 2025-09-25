@@ -77,7 +77,7 @@ const CartItem = ({ cartItem, onUpdateCart }: { cartItem: CartResponseProductsTy
         <div className="cart-item flex items-center justify-between border-b border-border last:border-0 pb-1">
             <div className="flex items-center gap-4">
                 <div className="cart-product-image w-20 h-auto">
-                    <img src={`${cartItem.image_url}`} />
+                    <img src={`${cartItem.image_url}`} className="rounded-sm" />
                 </div>
 
                 <div className="cart-product-details p-2 flex flex-col">

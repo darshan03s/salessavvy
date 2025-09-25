@@ -1,19 +1,12 @@
 import { Outlet } from "react-router-dom"
 import Header from "./Header"
+import Footer from "./Footer"
 
 const Main = () => {
     return (
         <main className="flex-1">
             <Outlet />
         </main>
-    )
-}
-
-const Footer = () => {
-    return (
-        <footer className="bg-foreground text-background w-full h-[48px] flex items-center justify-center">
-            <span className="text-xs">Copyright @2025</span>
-        </footer>
     )
 }
 
