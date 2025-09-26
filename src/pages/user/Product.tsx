@@ -22,7 +22,6 @@ const Product = () => {
       axios.get(productApiUrl + `/${productId}`, {
         withCredentials: true
       }).then(res => {
-        console.log(res.data.product)
         setProduct(res.data.product)
       }).catch(err => {
         toast.error("Unable to get product")

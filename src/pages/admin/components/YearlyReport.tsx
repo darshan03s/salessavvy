@@ -29,7 +29,6 @@ const YearlyReport = () => {
                 axios.get(adminBusinessUrl + `/yearly?year=${year}`, {
                     withCredentials: true
                 }).then(res => {
-                    console.log(res)
                     setReport(res.data)
                 })
             } catch (err) {

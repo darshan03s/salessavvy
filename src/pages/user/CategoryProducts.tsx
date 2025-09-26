@@ -24,7 +24,6 @@ const CategoryProducts = () => {
         })
             .then(response => {
                 setProducts(response.data.products);
-                console.log('Fetched category products:', response.data.products);
             })
             .catch(error => {
                 console.error('Error fetching category products:', error);

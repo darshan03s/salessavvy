@@ -25,7 +25,6 @@ const OverallReport = () => {
                 axios.get(adminBusinessUrl + `/overall`, {
                     withCredentials: true
                 }).then(res => {
-                    console.log(res)
                     setReport(res.data)
                 })
             } catch (err) {

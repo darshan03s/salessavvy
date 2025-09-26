@@ -29,7 +29,6 @@ const DailyReport = () => {
                 axios.get(adminBusinessUrl + `/daily?date=${date}`, {
                     withCredentials: true
                 }).then(res => {
-                    console.log(res)
                     setReport(res.data)
                 })
             } catch (err) {

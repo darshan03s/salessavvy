@@ -1,11 +1,12 @@
 services:
-  backend:
+  frontend:
+    build:
+      context: .
+      args:
+        VITE_APP_NAME: ${VITE_APP_NAME}
+        VITE_API_URL: ${VITE_API_URL}
+        VITE_RZP_KEY_ID: ${VITE_RZP_KEY_ID}
     image: salessavvyfrontend
-    build: .
     container_name: salessavvyfrontend
     ports:
       - "5173:80"
-    environment:
-      - VITE_APP_NAME=${VITE_APP_NAME}
-      - VITE_API_URL=${VITE_API_URL}
-      - VITE_RZP_KEY_ID=${VITE_RZP_KEY_ID}

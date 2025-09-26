@@ -24,7 +24,6 @@ const Cart = () => {
             },
             withCredentials: true
         }).then((res) => {
-            console.log(res)
             setCart(res.data.cart)
         }
         ).catch(() => {

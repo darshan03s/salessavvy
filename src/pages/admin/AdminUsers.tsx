@@ -13,7 +13,6 @@ const AdminUsers = () => {
             axios.get(adminUsersApiUrl, {
                 withCredentials: true
             }).then(res => {
-                console.log(res.data)
                 setUsers(res.data)
             })
         } catch (err) {
@@ -38,8 +37,7 @@ const AdminUsers = () => {
                 {
                     withCredentials: true,
                 }
-            ).then(res => {
-                console.log(res)
+            ).then(() => {
                 fetchUsers()
             })
         } catch (err) {

@@ -25,7 +25,6 @@ const LoginForm = () => {
     })
 
     const onSubmit = async (data: LoginFormData) => {
-        console.log('Form Data:', data)
         const response = await fetch(loginApiUrl, {
             method: 'POST',
             headers: {

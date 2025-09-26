@@ -30,7 +30,6 @@ const MonthlyReport = () => {
                 axios.get(adminBusinessUrl + `/monthly?year=${year}&month=${month}`, {
                     withCredentials: true
                 }).then(res => {
-                    console.log(res)
                     setReport(res.data)
                 })
             } catch (err) {

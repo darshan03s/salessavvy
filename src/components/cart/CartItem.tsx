@@ -10,7 +10,7 @@ const Quantity = ({ quantity, product_id, onUpdateCart }: { quantity: number, pr
 
     async function updateProductQuantity(product_id: number, op: string) {
         try {
-            const response = await axios.put(
+            await axios.put(
                 cartApiUrl + "/update",
                 { productId: product_id, username: user?.username, quantity: op === '+' ? 1 : -1 },
                 {
@@ -21,7 +21,6 @@ const Quantity = ({ quantity, product_id, onUpdateCart }: { quantity: number, pr
                 },
             );
 
-            console.log(response)
             onUpdateCart()
         } catch (err) {
             toast.error("Unable to update quantity")

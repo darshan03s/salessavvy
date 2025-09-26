@@ -35,7 +35,6 @@ const AdminProducts = () => {
             axios.get(productsApiUrl + "/all", {
                 withCredentials: true
             }).then(res => {
-                console.log(res)
                 setProducts(res.data)
             })
         } catch (err) {
@@ -49,7 +48,6 @@ const AdminProducts = () => {
             axios.get(productsApiUrl + "/categories", {
                 withCredentials: true
             }).then(res => {
-                console.log(res)
                 setCategories(res.data)
             })
         } catch (err) {
@@ -63,7 +61,6 @@ const AdminProducts = () => {
     }
 
     const onSubmit = async (data: ProductData) => {
-        console.log(data)
         try {
             axios.post(productsApiUrl, {
                 name: data.name,
@@ -77,8 +74,7 @@ const AdminProducts = () => {
                     "Content-Type": "application/json"
                 },
                 withCredentials: true
-            }).then(res => {
-                console.log(res)
+            }).then(() => {
                 toast.success("Product Added")
                 setIsAddingProduct(false)
                 getProducts()

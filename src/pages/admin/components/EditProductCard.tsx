@@ -59,7 +59,6 @@ const EditProductCard = ({ product, categories, onUpdate }: { product: ProductTy
 
     const onSubmit = async (data: ProductData) => {
         const modifiedProduct = { id: currentlyEditingProduct?.product_id, ...data }
-        console.log(modifiedProduct)
 
         try {
             axios.put(
@@ -75,8 +74,7 @@ const EditProductCard = ({ product, categories, onUpdate }: { product: ProductTy
                 {
                     withCredentials: true,
                 }
-            ).then(res => {
-                console.log(res)
+            ).then(() => {
                 setIsEditingProduct(false)
                 setCurrentlyEditingProduct(null)
                 onUpdate()
